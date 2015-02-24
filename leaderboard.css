@@ -1,0 +1,12 @@
+.selected {
+  background-color: #E8784F;
+}
+.players {
+   border: 2px solid #E8784F;
+   padding-bottom: 20px;
+}
+
+.add-player{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

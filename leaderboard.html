@@ -1,0 +1,61 @@
+<head>
+    <title>Leaderboard</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Meteor Leaderboard :D</h1>
+      {{ > leaderboard}}
+  </div>
+</body>
+
+<template name="leaderboard">
+  <div class="row">{{ > addPlayerForm}}</div>
+<div class="row">
+    
+  <div class="col-sm-2 ">{{ > playersList}}</div>
+  {{ > playerSelected}}
+</div>
+</template>
+
+<template name="playerSelected">
+  {{#if showPlayer}}
+  <div class="col-sm-2 ">
+    <div class="col-sm-12 img-rounded players">
+      <h4>Player: {{showPlayer.name}}</h4>
+      <button type="button" class="increment btn btn-xs btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Dar 5
+      </button>
+      <button type="button" class="decrement btn btn-xs btn-danger">
+        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        Quitar 5
+      </button>
+    </div>
+    <div class="col-sm-12 img-rounded players add-player">
+      <input type="button" class="remove btn btn-danger" value="Remove Player">
+    </div>
+
+  </div>
+  {{/if}}
+</template>
+
+<template name="playersList">
+  <ul class="list-group">
+    {{#each players}}
+    <li class="list-group-item player {{selectedClass}}">{{name}}: {{score}}</li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="addPlayerForm">
+  <div class="col-lg-6 add-player">
+    <form>
+      <div class="input-group">
+        <input class="form-control" placeholder="Agregar nuevo player..." type="text" name="playerName">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Agregar</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</template>
