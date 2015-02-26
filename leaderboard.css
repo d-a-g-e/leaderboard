@@ -4,9 +4,18 @@
 .players {
    border: 2px solid #E8784F;
    padding-bottom: 20px;
+   /*padding-top: 20px;*/
 }
 
 .add-player{
-  padding-top: 20px;
+  margin-top: 10px;
   padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.player-menu{
+  border: 2px solid #E8784F;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }

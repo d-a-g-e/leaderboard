@@ -3,6 +3,7 @@
 </head>
 <body>
   <div class="container">
+    {{> loginButtons}}
     <h1>Meteor Leaderboard :D</h1>
       {{ > leaderboard}}
   </div>
@@ -19,7 +20,7 @@
 
 <template name="playerSelected">
   {{#if showPlayer}}
-  <div class="col-sm-2 ">
+  <div class="col-sm-3 ">
     <div class="col-sm-12 img-rounded players">
       <h4>Player: {{showPlayer.name}}</h4>
       <button type="button" class="increment btn btn-xs btn-success">
@@ -30,9 +31,13 @@
         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
         Quitar 5
       </button>
+      <button type="button" class="btn-xs remove btn btn-danger">
+        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        remover
+      </button>
     </div>
-    <div class="col-sm-12 img-rounded players add-player">
-      <input type="button" class="remove btn btn-danger" value="Remove Player">
+    <div class="col-sm-12 img-rounded player-menu">
+      otro contenido
     </div>
 
   </div>
@@ -48,6 +53,7 @@
 </template>
 
 <template name="addPlayerForm">
+{{#if currentUser}}
   <div class="col-lg-6 add-player">
     <form>
       <div class="input-group">
@@ -58,4 +64,5 @@
       </div>
     </form>
   </div>
+{{/if}}
 </template>
