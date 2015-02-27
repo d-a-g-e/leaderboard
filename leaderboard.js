@@ -3,6 +3,8 @@ PlayersList = new Mongo.Collection('players');
 if (Meteor.isClient) {
   console.log("codigo que se ejecuta en el cliente")
 
+  Meteor.subscribe('thePlayers');
+
   // helper leaderboard
   Template.leaderboard.helpers({
     //helpers del template
@@ -20,8 +22,7 @@ if (Meteor.isClient) {
   Template.playersList.helpers({
     players: function(){
       var currentUserId = Meteor.userId();
-      return PlayersList.find({createdBy: currentUserId},
-                              {sort: {score: -1, name: 1}});
+      return PlayersList.find({},{sort: {score: -1, name: 1}});
     },
     count: function(){
       return PlayersList.find().count()
@@ -60,19 +61,29 @@ if (Meteor.isClient) {
   Template.addPlayerForm.events({
     'submit form': function(event) {
       event.preventDefault();
-      var currentUserId = Meteor.userId();
       var playerName = event.target.playerName.value;
-      PlayersList.insert({
-          name: playerName,
-          score: 0,
-          createdBy: currentUserId
-      });
-      event.target.playerName.value = ''
+       event.target.playerName.value = ''
+       Meteor.call('insertPlayerData',playerName);
     }
   });
-
 };
 
 if (Meteor.isServer) {
   console.log("codigo que se ejecuta en el servidor")
+
+  Meteor.publish('thePlayers', function(){
+    var currentUserId = this.userId;
+    return PlayersList.find({createdBy: currentUserId})
+  });
+
+  Meteor.methods({
+    'insertPlayerData': function(playerName){
+      var currentUserId = Meteor.userId();
+      PlayersList.insert({
+        name: playerName,
+        score: 0,
+        createdBy: currentUserId
+      });
+    }
+  });
 };
